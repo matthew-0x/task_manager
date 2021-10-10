@@ -2,27 +2,25 @@
   "name": "todo_list",
   "version": "0.0.1",
   "description": "A simple to-do list with database",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx babel ./ -d dist",
-    "start": "npm run build && node dist/index.js"
+    "start": "node backend/server",
+    "server": "npx nodemon backend/server",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npx webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mhvj/todo_v1.git"
   },
-  "keywords": [
-    "node.js",
-    "mongoDB",
-    "express"
-  ],
-  "author": "Matt V",
-  "license": "UNLICENSED",
+  "author": "Matt Vojdani",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mhvj/todo_v1/issues"
   },
-  "homepage": "https://github.com/mhvj/todo_v1#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
