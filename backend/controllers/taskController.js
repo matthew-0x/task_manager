@@ -1,4 +1,4 @@
-import Task from '../models/taskModel'
+import Task from '../models/taskModel.js'
 import asyncHandler from 'express-async-handler'
 // @desc    Fetch all tasks
 // @route   GET /api/tasks

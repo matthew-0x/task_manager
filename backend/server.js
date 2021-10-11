@@ -10,9 +10,11 @@ connectDB() // establishes database connection
 
 app.use(express.json())
 app.use('/api/tasks', taskRoutes)
-
+app.get('/', (req, res) => {
+  res.send('Server is up')
+})
 app.listen(
-  PORT,
+  serverPORT,
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port ${serverPORT}`
   )
