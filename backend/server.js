@@ -1,15 +1,19 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import taskRoutes from './routes/taskRoutes.js'
+import connectDB from './databaseConfig.js'
 dotenv.config({ path: './.env' })
 
-const server = express()
-const PORT = process.env.PORT || 5000
+const app = express()
+const serverPORT = process.env.PORT || 5000
+connectDB() // establishes database connection
 
-server.listen(
+app.use(express.json())
+app.use('/api/tasks', taskRoutes)
+
+app.listen(
   PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${serverPORT}`
+  )
 )
-
-server.get('/', (req, res) => {
-  res.send('api is working')
-})
