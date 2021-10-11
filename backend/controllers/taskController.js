@@ -1,10 +1,10 @@
 import Task from '../models/taskModel'
-
+import asyncHandler from 'express-async-handler'
 // @desc    Fetch all tasks
 // @route   GET /api/tasks
 // @access  Public
 
-export const getTasks = async (req, res) => {
+export const getTasks = asyncHandler(async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
 
@@ -23,12 +23,12 @@ export const getTasks = async (req, res) => {
     .skip(pageSize * (page - 1))
 
   res.json({ tasks, page, pages: Math.ceil(count / pageSize) })
-}
+})
 
 // @desc    Fetch a single task
 // @route   GET /api/tasks/:id
 // @access  Public
-export const getTaskById = async (req, res) => {
+export const getTaskById = asyncHandler(async (req, res) => {
   const task = await Task.findById(req.params.id)
 
   if (task) {
@@ -37,12 +37,12 @@ export const getTaskById = async (req, res) => {
     res.status(404)
     throw new Error('Task not found')
   }
-}
+})
 
 // @desc    Delete a task
 // @route   DELETE /api/tasks/:id
 // @access  Private/Admin  **Access control not implemented
-export const deleteTask = async (req, res) => {
+export const deleteTask = asyncHandler(async (req, res) => {
   const task = await Task.findById(req.params.id)
 
   if (task) {
@@ -52,12 +52,12 @@ export const deleteTask = async (req, res) => {
     res.status(404)
     throw new Error('Task not found')
   }
-}
+})
 
 // @desc    Create a task
 // @route   POST /api/tasks
 // @access  Private/Admin  **Access control not implemented
-export const createTask = async (req, res) => {
+export const createTask = asyncHandler(async (req, res) => {
   const task = new Task({
     description: 'Sample task',
     done: false,
@@ -65,12 +65,12 @@ export const createTask = async (req, res) => {
 
   const createdTask = await task.save()
   res.status(201).json(createdTask)
-}
+})
 
 // @desc    Update a task
 // @route   PUT /api/tasks/:id
 // @access  Private/Admin **Access control not implemented
-export const updateTask = async (req, res) => {
+export const updateTask = asyncHandler(async (req, res) => {
   const { description, done } = req.body
 
   const task = await Task.findById(req.params.id)
@@ -85,4 +85,4 @@ export const updateTask = async (req, res) => {
     res.status(404)
     throw new Error('Task not found')
   }
-}
+})
