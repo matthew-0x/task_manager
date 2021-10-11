@@ -4,7 +4,7 @@ import Task from '../models/taskModel'
 // @route   GET /api/tasks
 // @access  Public
 
-const getTasks = async (req, res) => {
+export const getTasks = async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
 
@@ -28,7 +28,7 @@ const getTasks = async (req, res) => {
 // @desc    Fetch a single task
 // @route   GET /api/tasks/:id
 // @access  Public
-const getTaskById = async (req, res) => {
+export const getTaskById = async (req, res) => {
   const task = await Task.findById(req.params.id)
 
   if (task) {
@@ -42,7 +42,7 @@ const getTaskById = async (req, res) => {
 // @desc    Delete a task
 // @route   DELETE /api/tasks/:id
 // @access  Private/Admin  **Access control not implemented
-const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
   const task = await Task.findById(req.params.id)
 
   if (task) {
@@ -57,7 +57,7 @@ const deleteTask = async (req, res) => {
 // @desc    Create a task
 // @route   POST /api/tasks
 // @access  Private/Admin  **Access control not implemented
-const createTask = async (req, res) => {
+export const createTask = async (req, res) => {
   const task = new Task({
     description: 'Sample task',
     done: false,
@@ -70,7 +70,7 @@ const createTask = async (req, res) => {
 // @desc    Update a task
 // @route   PUT /api/tasks/:id
 // @access  Private/Admin **Access control not implemented
-const updateTask = async (req, res) => {
+export const updateTask = async (req, res) => {
   const { description, done } = req.body
 
   const task = await Task.findById(req.params.id)
