@@ -1,9 +1,9 @@
 import Task from '../models/taskModel.js'
 import asyncHandler from 'express-async-handler'
+
 // @desc    Fetch all tasks
 // @route   GET /api/tasks
 // @access  Public
-
 export const getTasks = asyncHandler(async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
@@ -58,13 +58,10 @@ export const deleteTask = asyncHandler(async (req, res) => {
 // @route   POST /api/tasks
 // @access  Private/Admin  **Access control not implemented
 export const createTask = asyncHandler(async (req, res) => {
-  const task = new Task({
-    description: 'Sample task',
-    done: false,
-  })
-
+  const { description, done } = req.body
+  const task = new Task({ description, done })
   const createdTask = await task.save()
-  res.status(201).json(createdTask)
+  res.status(201).json({ task: createdTask })
 })
 
 // @desc    Update a task
@@ -80,7 +77,7 @@ export const updateTask = asyncHandler(async (req, res) => {
     task.done = done
 
     const updatedTask = await task.save()
-    res.json(updatedTask)
+    res.json({ UpdatedTask: updatedTask })
   } else {
     res.status(404)
     throw new Error('Task not found')
