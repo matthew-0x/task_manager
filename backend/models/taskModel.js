@@ -3,7 +3,11 @@ import mongoose from 'mongoose'
 const taskSchema = mongoose.Schema(
   {
     description: { type: String, required: true },
-    done: { type: Boolean },
+    status: {
+      type: String,
+      enum: ['pending', 'completed'],
+      default: 'pending',
+    },
   },
   { timestamps: true }
 )
