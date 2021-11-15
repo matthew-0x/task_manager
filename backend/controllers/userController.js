@@ -31,3 +31,11 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Registration error')
   }
 })
+
+// @desc    Lit of all users
+// @route   get /api/users
+// @access  private, Admin access required
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
+})
