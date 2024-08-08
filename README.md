@@ -1,3 +1,2 @@
 # task_manager
-Important: Development of this project is in progress and not complete.
-This is a MERN based task manager application. 
+This is not a compelete project since it was commercialised for a client.
